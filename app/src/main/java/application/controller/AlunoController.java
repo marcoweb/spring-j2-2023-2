@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import application.model.Aluno;
 import application.model.AlunoRepository;
 
 @Controller
@@ -31,6 +32,11 @@ public class AlunoController {
         @RequestParam("nome") String nome,
         @RequestParam("idade") int idade
     ) {
-        return "";
+        Aluno aluno = new Aluno();
+        aluno.setNome(nome);
+        aluno.setIdade(idade);
+
+        alunoRepo.save(aluno);
+        return "redirect:/aluno/list";
     }
 }
