@@ -42,6 +42,7 @@ public class AlunoController {
         return "redirect:/aluno/list";
     }
 
+    @RequestMapping("/update")
     public String update(
         @RequestParam("id") int id,
         Model ui
@@ -52,6 +53,16 @@ public class AlunoController {
             ui.addAttribute("aluno", resultado.get());
             return "/aluno/update";
         }
+
+        return "redirect:/aluno/list";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(
+        @RequestParam("id") int id,
+        @RequestParam("nome") String nome,
+        @RequestParam("idade") int id
+    ) {
 
         return "redirect:/aluno/list";
     }
