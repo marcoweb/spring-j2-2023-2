@@ -61,9 +61,17 @@ public class AlunoController {
     public String update(
         @RequestParam("id") int id,
         @RequestParam("nome") String nome,
-        @RequestParam("idade") int id
+        @RequestParam("idade") int idade
     ) {
+        Optional<Aluno> resultado = alunoRepo.findById(id);
 
+        if(resultado.isPresent()) {
+            resultado.get().setNome(nome);
+            resultado.get().setIdade(idade);
+
+            alunoRepo.save(resultado.get());
+        }
+        
         return "redirect:/aluno/list";
     }
 }
