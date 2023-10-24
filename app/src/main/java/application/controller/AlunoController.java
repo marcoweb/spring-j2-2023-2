@@ -71,7 +71,22 @@ public class AlunoController {
 
             alunoRepo.save(resultado.get());
         }
-        
+
+        return "redirect:/aluno/list";
+    }
+
+    @RequestMapping("/delete")
+    public String delete(
+        @RequestParam("id") int id,
+        Model ui
+    ) {
+        Optional<Aluno> resultado = alunoRepo.findById(id);
+
+        if(resultado.isPresent()) {
+            ui.addAttribute("aluno", resultado.get());
+            return "/aluno/delete";
+        }
+
         return "redirect:/aluno/list";
     }
 }
