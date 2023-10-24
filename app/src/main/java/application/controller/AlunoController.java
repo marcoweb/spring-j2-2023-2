@@ -1,5 +1,7 @@
 package application.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +39,20 @@ public class AlunoController {
         aluno.setIdade(idade);
 
         alunoRepo.save(aluno);
+        return "redirect:/aluno/list";
+    }
+
+    public String update(
+        @RequestParam("id") int id,
+        Model ui
+    ) {
+        Optional<Aluno> resultado = alunoRepo.findById(id);
+
+        if(resultado.isPresent()) {
+            ui.addAttribute("aluno", resultado.get());
+            return "/aluno/update";
+        }
+
         return "redirect:/aluno/list";
     }
 }
