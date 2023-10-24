@@ -89,4 +89,13 @@ public class AlunoController {
 
         return "redirect:/aluno/list";
     }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String delete(
+        @RequestParam("id") int id
+    ) {
+        alunoRepo.deleteById(id);
+        
+        return "redirect:/aluno/list";
+    }
 }
