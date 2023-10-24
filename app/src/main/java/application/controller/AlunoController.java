@@ -2,7 +2,10 @@ package application.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import application.model.AlunoRepository;
 
@@ -13,7 +16,21 @@ public class AlunoController {
     private AlunoRepository alunoRepo;
 
     @RequestMapping("/list")
-    public String list() {
+    public String list(Model ui) {
+        ui.addAttribute("alunos", alunoRepo.findAll());
         return "/aluno/list";
+    }
+
+    @RequestMapping("/insert")
+    public String insert() {
+        return "/aluno/insert";
+    }
+
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    public String insert(
+        @RequestParam("nome") String nome,
+        @RequestParam("idade") int idade
+    ) {
+        return "";
     }
 }
